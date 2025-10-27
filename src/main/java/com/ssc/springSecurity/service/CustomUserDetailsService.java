@@ -14,8 +14,15 @@ import com.ssc.springSecurity.repository.UserRepository;
 public class CustomUserDetailsService implements UserDetailsService {
 	
 	// 이후 생성자 주입 방식으로 변경, final 키워드도 넣어주면 된다. 
-	@Autowired
-	private UserRepository userRepository;
+//	@Autowired
+//	private UserRepository userRepository;
+
+	// 생성자 주입 방식(updated)
+	private final UserRepository userRepository;
+	// 생성자를 통해 UserRepository 의존성 주입
+	public CustomUserDetailsService(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
